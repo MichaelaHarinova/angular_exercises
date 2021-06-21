@@ -6,18 +6,22 @@ import {Component} from "@angular/core";
 })
 
 export class ProductListComponent {
-  pageTitle: string = 'Product List';
-  products: any[]=[
+  pageTitle = 'Product List';
+  imageWidth = 50;
+  imageMargin = 2;
+  showImage: boolean =false;
+  listFilter: string= 'cart';
+  products: any[] = [
     {
-    "productId": 1,
-    "productName": "Leaf Rake",
-    "productCode": "GDN-0011",
-    "releaseDate": "March 19, 2021",
-    "description": "Leaf rake with 48-inch wooden handle.",
-    "price": 19.95,
-    "starRating": 3.2,
-    "imageUrl": "assets/images/leaf_rake.png"
-  },
+      "productId": 1,
+      "productName": "Leaf Rake",
+      "productCode": "GDN-0011",
+      "releaseDate": "March 19, 2021",
+      "description": "Leaf rake with 48-inch wooden handle.",
+      "price": 19.95,
+      "starRating": 3.2,
+      "imageUrl": "assets/images/leaf_rake.png"
+    },
     {
       "productId": 2,
       "productName": "Garden Cart",
@@ -58,4 +62,7 @@ export class ProductListComponent {
       "starRating": 4.6,
       "imageUrl": "assets/images/xbox-controller.png"
     }];
+  toggleImage(): void {
+    this.showImage = !this.showImage;
+  }
 }
