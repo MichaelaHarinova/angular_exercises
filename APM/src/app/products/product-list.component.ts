@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
 import {IProduct} from "./product";
 import {ProductService} from "./product.service";
 import {Subscription} from "rxjs";
@@ -17,8 +17,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   imageWidth = 50;
   imageMargin = 2;
   showImage: boolean = false;
+  buttonActive: boolean = true;
   errorMessage = '';
   sub!: Subscription;
+
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -61,5 +63,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onRatingClicked(message: string): void {
     this.pageTitle = 'Product List: ' + message;
+  }
+
+  onTitleClickedChange(): void {
+    this.buttonActive = false;
+  }
+
+  onButtonClick(): void {
+    this.pageTitle = 'You clicked the button! Click "here" now!';
   }
 }

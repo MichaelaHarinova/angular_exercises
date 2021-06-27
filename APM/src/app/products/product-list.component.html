@@ -1,8 +1,14 @@
-<div class="card">
-  <div class="card-header">
+<div class="card color">
+  <div class="card-header here" (click)="onTitleClickedChange()">
     {{pageTitle}}
   </div>
-  <div class="card-body">
+  <div class="float-right">
+    <pm-image-button
+      [buttonActive]="this.buttonActive"
+      (buttonClicked)="onButtonClick()">
+    </pm-image-button>
+  </div>
+  <div class="card-body color">
     <div class="row">
       <div class="col-md-2">Filter by:</div>
       <div class="col-md-4">
@@ -19,8 +25,8 @@
         <thead>
         <tr>
           <th>
-            <button class="btn-primary" (click)="toggleImage()">
-              {{showImage ? 'Hide' : 'Show'}} Image
+            <button class="btn buttonItems" (click)="toggleImage()">
+              {{showImage ? 'Hide' : 'Show' }} Image
             </button>
           </th>
           <th>Product</th>
@@ -41,14 +47,16 @@
           </td>
           <td>
             <a [routerLink]="['/products', product.productId]">
-            {{product.productName}}
+              {{product.productName}}
             </a>
           </td>
           <td>{{product.productCode | lowercase | convertToSpaces:'-'}}</td>
           <td>{{product.releaseDate}}</td>
           <td>{{product.price | currency: 'USD' : 'symbol' : '1.2-2'}}</td>
-          <td><pm-star [rating]="product.starRating"
-          (ratingClicked)="onRatingClicked($event)"></pm-star></td>
+          <td>
+            <pm-star [rating]="product.starRating"
+                     (ratingClicked)="onRatingClicked($event)"></pm-star>
+          </td>
         </tr>
         </tbody>
       </table>

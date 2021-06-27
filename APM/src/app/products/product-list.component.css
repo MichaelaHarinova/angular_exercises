@@ -1,3 +1,16 @@
-thead{
-  color:blue;
+thead {
+  color: #298279;
+}
+
+.color {
+  color: #113632;
+}
+
+.buttonItems {
+  background-color: #298279;
+}
+
+.here{
+  cursor: pointer;
+  color:#298279;
 }

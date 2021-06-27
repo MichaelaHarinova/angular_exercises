@@ -7,6 +7,7 @@ import {WelcomeComponent} from "./home/welcome.component";
 import {RouterModule} from "@angular/router";
 import { ProductModule } from './products/product.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,

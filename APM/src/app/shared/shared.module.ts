@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {StarComponent} from "./star.component";
 import {FormsModule} from "@angular/forms";
+import {BicolorButtonComponent} from "./bicolor-button.component";
 
 @NgModule({
   declarations: [
-    StarComponent
+    StarComponent,
+    BicolorButtonComponent
   ],
   imports: [
     CommonModule
@@ -13,7 +15,8 @@ import {FormsModule} from "@angular/forms";
   exports: [
     CommonModule,
     FormsModule,
-    StarComponent
+    StarComponent,
+    BicolorButtonComponent
   ]
 })
 export class SharedModule { }
