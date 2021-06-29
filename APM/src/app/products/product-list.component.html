@@ -1,18 +1,24 @@
 <div class="card color">
-  <div class="card-header here" (click)="onTitleClickedChange()">
+  <div class="card-header here text-center"
+       (click)="onTitleClickedChange()"
+       matTooltip="Click to change color of the button">
     {{pageTitle}}
   </div>
-  <div class="float-right">
-    <pm-image-button
+  <br>
+  <div class="card-body float-right">
+    <pm-bicolor-button
       [buttonActive]="this.buttonActive"
-      (buttonClicked)="onButtonClick()">
-    </pm-image-button>
+      (buttonClicked)="onButtonClick()"
+      matTooltip="Click to trigger an event in header">
+    </pm-bicolor-button>
   </div>
   <div class="card-body color">
     <div class="row">
       <div class="col-md-2">Filter by:</div>
       <div class="col-md-4">
-        <input type="text" [(ngModel)]="listFilter">
+        <label>
+          <input type="text" [(ngModel)]="listFilter">
+        </label>
       </div>
     </div>
     <div class="row">
@@ -25,7 +31,9 @@
         <thead>
         <tr>
           <th>
-            <button class="btn buttonItems" (click)="toggleImage()">
+            <button class="btn buttonItems"
+                    (click)="toggleImage()"
+                    matTooltip="Click to see images of products">
               {{showImage ? 'Hide' : 'Show' }} Image
             </button>
           </th>
@@ -43,7 +51,8 @@
                  [src]="product.imageUrl"
                  [title]="product.productName | uppercase"
                  [style.width.px]="imageWidth"
-                 [style.margin.px]="imageMargin">
+                 [style.margin.px]="imageMargin"
+                 [matTooltip]="product.productName">
           </td>
           <td>
             <a [routerLink]="['/products', product.productId]">

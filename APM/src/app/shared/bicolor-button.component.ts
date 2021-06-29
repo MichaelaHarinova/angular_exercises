@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 
 @Component({
-  selector: 'pm-image-button',
+  selector: 'pm-bicolor-button',
   templateUrl: './bicolor-button.component.html',
   styleUrls: ['./bicolor-button.component.css']
 })

@@ -1,7 +1,7 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
-import { CommonModule } from '@angular/common';
-import { BicolorButtonComponent } from '../../src/app/shared/bicolor-button.component';
+import {moduleMetadata, Story, Meta} from '@storybook/angular';
+import {action} from '@storybook/addon-actions';
+import {CommonModule} from '@angular/common';
+import {BicolorButtonComponent} from '../../src/app/shared/bicolor-button.component';
 
 export default {
   component: BicolorButtonComponent,
@@ -12,7 +12,7 @@ export default {
     }),
   ],
   argTypes: {
-    backgroundColor: { control: 'color' },
+    backgroundColor: {control: 'color'},
   },
   excludeStories: /.*Data$/,
   title: 'Button-Color',

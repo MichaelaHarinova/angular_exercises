@@ -70,6 +70,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   onButtonClick(): void {
-    this.pageTitle = 'You clicked the button! Click "here" now!';
+    this.pageTitle = 'You clicked the button!';
   }
 }
