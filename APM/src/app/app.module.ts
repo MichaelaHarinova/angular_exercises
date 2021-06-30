@@ -9,7 +9,6 @@ import { ProductModule } from './products/product.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

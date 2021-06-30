@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core"
 import {IProduct} from "./product";
 import {ProductService} from "./product.service";
 import {Subscription} from "rxjs";
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './product-list.component.html',
@@ -10,9 +11,10 @@ import {Subscription} from "rxjs";
 
 export class ProductListComponent implements OnInit, OnDestroy {
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private _snackBar: MatSnackBar) {
   }
-
+  durationInSeconds = 3;
   pageTitle = 'Product List';
   imageWidth = 50;
   imageMargin = 2;
@@ -70,6 +72,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   onButtonClick(): void {
-    this.pageTitle = 'You clicked the button!';
+    this.pageTitle = 'Click here!';
   }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message , action, {
+      duration: this.durationInSeconds * 1000
+    });
+  }
+
 }

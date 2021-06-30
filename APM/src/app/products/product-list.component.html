@@ -9,7 +9,8 @@
     <pm-bicolor-button
       [buttonActive]="this.buttonActive"
       (buttonClicked)="onButtonClick()"
-      matTooltip="Click to trigger an event in header">
+      matTooltip="Click to trigger an event in header"
+      (click)="openSnackBar('You clicked the button!','')">
     </pm-bicolor-button>
   </div>
   <div class="card-body color">
@@ -33,7 +34,7 @@
           <th>
             <button class="btn buttonItems"
                     (click)="toggleImage()"
-                    matTooltip="Click to see images of products">
+                    matTooltip="Click to see or hide images of products">
               {{showImage ? 'Hide' : 'Show' }} Image
             </button>
           </th>
@@ -49,10 +50,10 @@
           <td>
             <img *ngIf="showImage"
                  [src]="product.imageUrl"
-                 [title]="product.productName | uppercase"
                  [style.width.px]="imageWidth"
                  [style.margin.px]="imageMargin"
                  [matTooltip]="product.productName">
+            <!-- [title]="product.productName | uppercase"-->
           </td>
           <td>
             <a [routerLink]="['/products', product.productId]">

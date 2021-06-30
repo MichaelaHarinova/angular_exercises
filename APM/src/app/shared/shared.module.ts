@@ -4,6 +4,7 @@ import {StarComponent} from "./star.component";
 import {FormsModule} from "@angular/forms";
 import {BicolorButtonComponent} from "./bicolor-button.component";
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     FormsModule,
     StarComponent,
     BicolorButtonComponent,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule {
