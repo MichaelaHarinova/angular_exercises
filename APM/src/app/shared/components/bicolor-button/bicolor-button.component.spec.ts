@@ -8,9 +8,8 @@ describe('ImageButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BicolorButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [BicolorButtonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

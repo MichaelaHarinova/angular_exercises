@@ -1,19 +1,28 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
-import {IProduct} from "./product";
-import {ProductService} from "./product.service";
-import {Subscription} from "rxjs";
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { IProduct } from './product';
+import { ProductService } from './product.service';
+import { Subscription } from 'rxjs';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
-
 export class ProductListComponent implements OnInit, OnDestroy {
-
-  constructor(private productService: ProductService,
-              private _snackBar: MatSnackBar) {
-  }
+  constructor(
+    private productService: ProductService,
+    private _snackBar: MatSnackBar
+  ) {}
   durationInSeconds = 3;
   pageTitle = 'Product List';
   imageWidth = 50;
@@ -22,7 +31,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   buttonActive: boolean = true;
   errorMessage = '';
   sub!: Subscription;
-
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -42,7 +50,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: IProduct) =>
-      product.productName.toLocaleLowerCase().includes(filterBy));
+      product.productName.toLocaleLowerCase().includes(filterBy)
+    );
   }
 
   toggleImage(): void {
@@ -51,11 +60,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.productService.getProducts().subscribe({
-      next: products => {
+      next: (products) => {
         this.products = products;
         this.filteredProducts = this.products;
       },
-      error: err => this.errorMessage = err
+      error: (err) => (this.errorMessage = err),
     });
   }
 
@@ -68,16 +77,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   onTitleClickedChange(): void {
-    this.buttonActive = false;
+    this.buttonActive = !this.buttonActive;
   }
 
   onButtonClick(): void {
     this.pageTitle = 'Click here!';
   }
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message , action, {
-      duration: this.durationInSeconds * 1000
+    this._snackBar.open(message, action, {
+      duration: this.durationInSeconds * 1000,
     });
   }
-
 }
