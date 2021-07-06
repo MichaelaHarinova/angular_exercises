@@ -9,7 +9,8 @@
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6007",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "build-storybook": "npm run docs:json && build-storybook",
+    "lint": "tsc --noEmit && eslint . --ext js,ts,json --quiet --fix"
   },
   "private": true,
   "dependencies": {
@@ -31,8 +32,14 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "8": "0.0.1",
     "@angular-devkit/build-angular": "^12.0.5",
-    "@angular/cli": "~12.0.0",
+    "@angular-eslint/builder": "12.2.0",
+    "@angular-eslint/eslint-plugin": "12.2.0",
+    "@angular-eslint/eslint-plugin-template": "12.2.0",
+    "@angular-eslint/schematics": "12.2.0",
+    "@angular-eslint/template-parser": "12.2.0",
+    "@angular/cli": "^12.1.1",
     "@angular/compiler-cli": "~12.0.0",
     "@angular/elements": "^12.1.0",
     "@babel/core": "^7.14.6",
@@ -45,14 +52,26 @@
     "@storybook/manager-webpack5": "^6.3.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "4.23.0",
+    "@typescript-eslint/parser": "4.23.0",
     "@webcomponents/custom-elements": "^1.4.3",
+    "ajv": "^6.12.6",
     "babel-loader": "^8.2.2",
+    "cypress": "^7.6.0",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
     "jasmine-core": "~3.7.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "typescript": "~4.2.3"
+    "prettier": "^2.3.2",
+    "typescript": "~4.2.3",
+    "webpack": "^5.42.0"
   }
 }

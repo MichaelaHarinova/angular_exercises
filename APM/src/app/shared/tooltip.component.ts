@@ -1,13 +1,10 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  templateUrl: './tooltip.component.html',
-  styleUrls: ['./tooltip.component.css']
+	templateUrl: "./tooltip.component.html",
+	styleUrls: ["./tooltip.component.css"]
 })
 export class TooltipComponent {
-
-  @Input('matTooltip')
-  message!: string;
-
+	@Input("matTooltip")
+	message!: string;
 }
-

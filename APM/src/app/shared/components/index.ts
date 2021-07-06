@@ -1,1 +1,2 @@
-export * from './bicolor-button/bicolor-button.component';
+export * from "./bicolor-button/bicolor-button.component";
+

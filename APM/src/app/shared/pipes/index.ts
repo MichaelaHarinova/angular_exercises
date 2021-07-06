@@ -1,1 +1,1 @@
-export * from './convert-to-spaces.pipe';
+export * from "./convert-to-spaces.pipe";
