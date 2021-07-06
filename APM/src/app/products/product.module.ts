@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ProductListComponent } from "../products/product-list/product-list.component";
 import { ProductDetailComponent } from "../products/product-detail/product-detail.component";
-import { RouterModule } from "@angular/router";
-import { ProductDetailGuard } from "../products/product-detail/product-detail.guard";
 import { SharedModule } from "../shared/shared.module";
 import { TooltipComponent } from "../shared/components";
 import { MatTooltipModule } from "@angular/material/tooltip";
