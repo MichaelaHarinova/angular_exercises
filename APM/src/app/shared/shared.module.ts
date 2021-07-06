@@ -5,7 +5,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BicolorButtonComponent } from "./components";
 import { ConvertToSpacesPipe } from "./pipes";
-import { StarComponent } from "./star.component";
+import { StarComponent } from "./components";
 
 @NgModule({
 	declarations: [

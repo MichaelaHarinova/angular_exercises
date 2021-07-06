@@ -5,14 +5,10 @@ import {
 	OnInit,
 	Output
 } from "@angular/core";
-import { IProduct } from "./product";
-import { ProductService } from "./product.service";
+import { IProduct } from "../product";
+import { ProductService } from "../product.service";
 import { Subscription } from "rxjs";
-import {
-	MatSnackBar,
-	MatSnackBarHorizontalPosition,
-	MatSnackBarVerticalPosition
-} from "@angular/material/snack-bar";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
 	templateUrl: "./product-list.component.html",
