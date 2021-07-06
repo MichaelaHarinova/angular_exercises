@@ -15,15 +15,19 @@ chrome-profiler-events*.json
 
 # IDEs and editors
 /.idea
+../.idea
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+.eslintrc.json
+.prettierrc.json
 
 # IDE - VSCode
 .vscode/*
+../.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
