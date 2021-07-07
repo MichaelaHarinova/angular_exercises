@@ -6,6 +6,7 @@ import { TooltipComponent } from "../shared/components";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
 import { ProductRoutingModule } from "./product-routing.module";
+import { FormsModule } from "@angular/forms";
 
 //import {SnackBarComponent} from '../shared/snack-bar.component';
 
@@ -20,7 +21,8 @@ import { ProductRoutingModule } from "./product-routing.module";
 		ProductRoutingModule,
 		CommonModule,
 		MatTooltipModule,
-		SharedModule
+		SharedModule,
+		FormsModule
 	]
 })
 export class ProductModule {}

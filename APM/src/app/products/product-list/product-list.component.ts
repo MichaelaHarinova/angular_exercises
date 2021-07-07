@@ -79,6 +79,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	onButtonClick(): void {
 		this.pageTitle = "Click here!";
 	}
+	
 	openSnackBar(message: string, action: string) {
 		this._snackBar.open(message, action, {
 			duration: this.durationInSeconds * 1000

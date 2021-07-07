@@ -7,6 +7,7 @@ import { AppComponent } from "./app.component";
 import { WelcomeComponent } from "./home/welcome.component";
 import { ProductModule } from "./products/product.module";
 
+
 @NgModule({
 	declarations: [AppComponent, WelcomeComponent],
 	imports: [
@@ -18,7 +19,7 @@ import { ProductModule } from "./products/product.module";
 			{ path: "**", redirectTo: "welcome", pathMatch: "full" }
 		]),
 		ProductModule,
-		NoopAnimationsModule
+		NoopAnimationsModule,
 	],
 	bootstrap: [AppComponent]
 })
