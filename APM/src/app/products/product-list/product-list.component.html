@@ -22,7 +22,7 @@
 			<div class="col-md-2">Filter by:</div>
 			<div class="col-md-4">
 				<label>
-					<!-- <input type="text" [(ngModel)]="listFilter" /> -->
+					<input type="text" [(ngModel)]="listFilter" />
 				</label>
 			</div>
 		</div>
@@ -39,8 +39,7 @@
 							<button
 								class="btn buttonItems"
 								(click)="toggleImage()"
-								matTooltip="Click to see or hide images of products"
-							>
+								matTooltip="Click to see or hide images of products">
 								{{ showImage ? "Hide" : "Show" }} Image
 							</button>
 						</th>
