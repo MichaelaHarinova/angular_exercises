@@ -2,9 +2,9 @@ import { APP_BASE_HREF, CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from "../../shared/shared.module";
 import { ProductDetailComponent } from "./product-detail.component";
-import { ProductRoutingModule } from "./product-routing.module";
+import { ProductRoutingModule } from "../product-routing.module";
 
 export default {
 	component: ProductDetailComponent,
