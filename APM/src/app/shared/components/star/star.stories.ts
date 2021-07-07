@@ -23,19 +23,26 @@ const Template: Story<StarComponent> = (args) => ({
 	}
 });
 
-export const ratingColor = Template.bind({});
-ratingColor.args = {
+export const Small = Template.bind({});
+Small.args = {
 	rating: 5,
-	cropWidth: 75,
+	starSize: 16,
 	maxDivWidth: 75,
-    label: "Star"
+    label: "Small stars"
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+    rating: 5,
+	starSize: 32,
+	maxDivWidth: 150,
+    label: "Medium stars"
 };
 
 export const Large = Template.bind({});
 Large.args = {
-    rating: 0,
-	starSize: 30,
-	maxDivWidth: 300,
-	cropWidth: 300,
-    label: "Star"
+    rating: 5,
+	starSize: 48,
+	maxDivWidth: 225,
+    label: "Large stars"
 };
