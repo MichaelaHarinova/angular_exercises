@@ -12,12 +12,16 @@ import {
 	styleUrls: ["./star.component.css"]
 })
 export class StarComponent implements OnChanges {
-	cropWidth = 75;
+	 		 cropWidth = 75;
+	@Input() maxDivWidth = 75;
+	@Input() starSize = 16;
 	@Input() rating = 0;
+	@Input() color = "gray";
+	@Input() label = "";
 	@Output() ratingClicked: EventEmitter<string> = new EventEmitter<string>();
 
 	ngOnChanges(): void {
-		this.cropWidth = (this.rating * 75) / 5;
+		this.cropWidth = (this.rating * this.maxDivWidth) / 5;
 	}
 
 	onClick(): void {

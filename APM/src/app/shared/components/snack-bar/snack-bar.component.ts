@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
@@ -7,7 +7,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 	styleUrls: ["./snack-bar.component.css"]
 })
 export class SnackBarComponent {
-	durationInSeconds = 3;
+	@Input()durationInSeconds = 3;
 
 	constructor(private _snackBar: MatSnackBar) {}
 
@@ -17,3 +17,5 @@ export class SnackBarComponent {
 		});
 	}
 }
+
+
