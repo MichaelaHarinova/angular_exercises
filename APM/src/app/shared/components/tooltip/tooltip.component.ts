@@ -7,6 +7,5 @@ import { Component, Input } from "@angular/core";
 export class TooltipComponent {
 	@Input() label = "Tooltip"
 	@Input() color!: string;
-	@Input("matTooltip")
-	message!: string;
+	@Input("matTooltip") message!: string;
 }

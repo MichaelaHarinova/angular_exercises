@@ -4,9 +4,11 @@ import { ProductDetailComponent } from "../products/product-detail/product-detai
 import { SharedModule } from "../shared/shared.module";
 import { TooltipComponent } from "../shared/components";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { CommonModule } from "@angular/common";
 import { ProductRoutingModule } from "./product-routing.module";
 import { FormsModule } from "@angular/forms";
+
 
 //import {SnackBarComponent} from '../shared/snack-bar.component';
 
@@ -14,7 +16,7 @@ import { FormsModule } from "@angular/forms";
 	declarations: [
 		ProductListComponent,
 		ProductDetailComponent,
-		TooltipComponent
+		TooltipComponent,
 		//SnackBarComponent
 	],
 	imports: [

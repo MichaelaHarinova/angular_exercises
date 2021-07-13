@@ -7,6 +7,7 @@ import { BicolorButtonComponent } from "./components/bicolor-button/bicolor-butt
 import { ConvertToSpacesPipe } from "./pipes/convert-to-spaces.pipe";
 import { StarComponent } from "./components/star/star.component";
 
+
 @NgModule({
 	declarations: [
 		// Components

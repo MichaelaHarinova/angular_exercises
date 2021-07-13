@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
 import { TooltipComponent } from "./tooltip.component";
+import { buttonPrimary } from "../bicolor-button/bicolor-button.stories";
 
 export default {
 	component: TooltipComponent,
@@ -19,11 +20,11 @@ export default {
 const Template: Story<TooltipComponent> = (args) => ({
 	component: TooltipComponent,
 	props: {
-		...args
+		...buttonPrimary
 	}
 });
 
-export const textColor = Template.bind({});
-textColor.args = { 
-
+export const message = Template.bind({});
+message.args = { 
+message: "Text"
 };
