@@ -39,7 +39,8 @@
 							<button
 								class="btn buttonItems"
 								(click)="toggleImage()"
-								matTooltip="Click to see or hide images of products">
+								matTooltip="Click to see or hide images of products"
+							>
 								{{ showImage ? "Hide" : "Show" }} Image
 							</button>
 						</th>
@@ -73,8 +74,7 @@
 						</td>
 						<td>{{ product.releaseDate }}</td>
 						<td>
-							{{ product.price | currency: "USD":"symbol":"1.2-2"
-							}}
+							{{ product.price | currency:"USD":"symbol":"1.2-2"}}
 						</td>
 						<td>
 							<pm-star

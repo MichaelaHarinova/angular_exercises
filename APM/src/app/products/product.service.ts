@@ -4,11 +4,14 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap, map } from "rxjs/operators";
 
+
 @Injectable({
 	providedIn: "root"
 })
 export class ProductService {
-	private productUrl = "api/products/products.json";
+	[x: string]: any;
+	private productUrl = 'http://localhost:9001/products';
+  	private productUrlEdit = 'http://localhost:9001/onEdit';
 
 	constructor(private http: HttpClient) {}
 
@@ -18,13 +21,38 @@ export class ProductService {
 			catchError(this.handleError)
 		);
 	}
+
 	getProduct(id: number): Observable<IProduct | undefined> {
+		console.log("get product");
 		return this.getProducts().pipe(
-			map((products: IProduct[]) =>
-				products.find((p) => p.productId === id)
+			map((products: IProduct[]) => {
+			//	this.setProduct(1,"TEST");
+				return products.find((p) => p.productId === id)}	
 			)
 		);
 	}
+
+	setProduct(id: number,s: string): void {
+
+		this.getProducts().pipe(
+			map((products: IProduct[]) => 
+				{
+					
+					/*
+					let productToUpdate = products.find((p) => p.productId === id)
+					productToUpdate!.productName = s;
+					console.log(productToUpdate);
+					*/
+				}
+			)
+		);
+	} 
+
+/*	updateFriend(product: IProduct, updatedProduct: IProduct): Observable<any> {
+		updatedProduct.productId = product.productId;
+		return this.http.post(this.productUrlEdit, updatedProduct);
+	  }*/
+
 	private handleError(err: HttpErrorResponse) {
 		let errorMessage = "";
 		if (err.error instanceof ErrorEvent) {

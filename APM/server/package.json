@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelaHarinova/angular_exercises.git"
+  },
+  "author": "Michaela Harinova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelaHarinova/angular_exercises/issues"
+  },
+  "homepage": "https://github.com/MichaelaHarinova/angular_exercises#readme",
+  "dependencies": {
+    "mongoose": "^5.13.2"
+  }
+}

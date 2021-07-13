@@ -2,15 +2,17 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { IProduct } from "../product";
 import { ProductService } from "../product.service";
+import productDetailStories from "./product-detail.stories";
 
 @Component({
 	templateUrl: "./product-detail.component.html",
 	styleUrls: ["./product-detail.component.css"]
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent  {
 	pageTitle = "Products Detail";
 	product!: IProduct;
 	errorMessage = "";
+	
 
 	constructor(
 		private route: ActivatedRoute,
@@ -26,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
 		}
 	}
 
-	ngOnInit(): void {}
+	
 
 	getProduct(id: number): void {
 		this.productService.getProduct(id).subscribe({
@@ -34,7 +36,13 @@ export class ProductDetailComponent implements OnInit {
 			error: (err) => (this.errorMessage = err)
 		});
 	}
+	
 	onBack(): void {
 		this.router.navigate(["/products"]).then((r) => console.log());
 	}
-}
+
+	public async onEdit(product: IProduct): Promise<any>{
+		this.productService.onEdit(product, this.product).subscribe
+	  }
+	
+	}
