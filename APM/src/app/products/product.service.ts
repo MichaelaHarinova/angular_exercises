@@ -23,7 +23,7 @@ export class ProductService {
 	}
 
 	getProduct(id: number): Observable<IProduct | undefined> {
-		console.log("get product");
+		console.log("get product")
 		return this.getProducts().pipe(
 			map((products: IProduct[]) => {
 			//	this.setProduct(1,"TEST");
@@ -38,11 +38,11 @@ export class ProductService {
 			map((products: IProduct[]) => 
 				{
 					
-					/*
+					
 					let productToUpdate = products.find((p) => p.productId === id)
 					productToUpdate!.productName = s;
 					console.log(productToUpdate);
-					*/
+					
 				}
 			)
 		);

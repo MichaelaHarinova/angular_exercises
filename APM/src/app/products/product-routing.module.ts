@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
 import { ProductDetailGuard } from "./product-detail/product-detail.guard";
 import { ProductListComponent } from "./product-list/product-list.component";
+import { ProductEditComponent } from "./product-edit/product-edit.component";
 
 const routes: Routes = [
 	{
@@ -10,7 +11,8 @@ const routes: Routes = [
 		canActivate: [ProductDetailGuard],
 		component: ProductDetailComponent
 	},
-	{ path: "products", component: ProductListComponent }
+	{ path: "products", component: ProductListComponent },
+	{ path: "upadteProduct", component: ProductEditComponent}
 ];
 
 @NgModule({

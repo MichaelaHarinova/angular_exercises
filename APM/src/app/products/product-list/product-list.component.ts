@@ -1,9 +1,7 @@
 import {
 	Component,
-	EventEmitter,
 	OnDestroy,
-	OnInit,
-	Output
+	OnInit
 } from "@angular/core";
 import { IProduct } from "../product";
 import { ProductService } from "../product.service";

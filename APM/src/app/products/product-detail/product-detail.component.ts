@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { IProduct } from "../product";
 import { ProductService } from "../product.service";
-import productDetailStories from "./product-detail.stories";
+
 
 @Component({
 	templateUrl: "./product-detail.component.html",
@@ -41,8 +41,8 @@ export class ProductDetailComponent  {
 		this.router.navigate(["/products"]).then((r) => console.log());
 	}
 
-	public async onEdit(product: IProduct): Promise<any>{
-		this.productService.onEdit(product, this.product).subscribe
-	  }
+   /* onEdit(): void
+		this.router.navigate(["/upadteProduct"]).then(() => console.log());
+	  }*/
 	
 	}

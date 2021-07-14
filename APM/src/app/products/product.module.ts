@@ -8,6 +8,7 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { CommonModule } from "@angular/common";
 import { ProductRoutingModule } from "./product-routing.module";
 import { FormsModule } from "@angular/forms";
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 
 //import {SnackBarComponent} from '../shared/snack-bar.component';
@@ -17,6 +18,7 @@ import { FormsModule } from "@angular/forms";
 		ProductListComponent,
 		ProductDetailComponent,
 		TooltipComponent,
+        ProductEditComponent,
 		//SnackBarComponent
 	],
 	imports: [
