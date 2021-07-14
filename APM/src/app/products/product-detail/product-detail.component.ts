@@ -41,8 +41,9 @@ export class ProductDetailComponent  {
 		this.router.navigate(["/products"]).then((r) => console.log());
 	}
 
-   /* onEdit(): void
-		this.router.navigate(["/upadteProduct"]).then(() => console.log());
-	  }*/
+    onEdit(): void {	
+	
+			this.router.navigate(["/upadteProduct"]).then(() => console.log());
+	  }
 	
 	}
