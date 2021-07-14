@@ -1,13 +1,29 @@
 <div class="card">
 	<div class="card-header">{{ pageTitle + ":" + product?.productName }}</div>
-	<form>
+	<form
+		class="row gx-3 gy-2 align-items-center"
+		#formName="ngForm"
+		novalidate
+		(ngSubmit)="onSubmit()"
+	>
 		<div class="card-body" *ngIf="product">
 			<div class="row">
 				<div class="col-md-8">
-					<div class="row">
+					<label class="form-label" class="row">
 						<div class="col-md-4">Name:</div>
 						<div class="col-md-8">{{ product.productName }}</div>
-					</div>
+					</label>
+					<input
+						class="form-control"
+						required="required"
+						#name="ngModel"
+						type="text"
+						id="productName"
+						value=""
+						name="productName"
+						pattern="[A-Za-zéàáèý]{1,15}"
+						[(ngModel)]="product.productName"
+					/>
 					<div class="row">
 						<div class="col-md-4">Code:</div>
 						<div class="col-md-8">

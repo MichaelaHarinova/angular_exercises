@@ -11,7 +11,7 @@ import { catchError, tap, map } from "rxjs/operators";
 export class ProductService {
 	[x: string]: any;
 	private productUrl = 'http://localhost:9001/products';
-  	private productUrlEdit = 'http://localhost:9001/onEdit';
+  	private productUrlEdit = 'http://localhost:9001/upadteProduct';
 
 	constructor(private http: HttpClient) {}
 
