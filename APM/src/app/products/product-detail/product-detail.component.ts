@@ -28,8 +28,6 @@ export class ProductDetailComponent  {
 		}
 	}
 
-	
-
 	getProduct(id: number): void {
 		this.productService.getProduct(id).subscribe({
 			next: (product) => (product ? (this.product = product) : null),
@@ -41,9 +39,9 @@ export class ProductDetailComponent  {
 		this.router.navigate(["/products"]).then((r) => console.log());
 	}
 
-    onEdit(): void {	
+    onEdit(productId: number): void {	
 	
-			this.router.navigate(["/upadteProduct"]).then(() => console.log());
+		this.router.navigate(["/editProduct", productId]).then((r) => console.log());
 	  }
 	
 	}

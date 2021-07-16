@@ -19,7 +19,7 @@ app.all("/*", function (req, res, next) {
 app.listen(PORT, function () {
 });
 
-app.post('/onEdit', function (request, response) {
+app.post('/editProduct', function (request, response) {
   console.log(request.body);
   Product.replaceOne({ id: request.body.id }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
   });
@@ -27,6 +27,9 @@ app.post('/onEdit', function (request, response) {
 app.get('/products', function (request, response) {
   Product.find().then(products => response.status(200).send(products));
   });
+
+
+
 
 
 /* Mongoose */

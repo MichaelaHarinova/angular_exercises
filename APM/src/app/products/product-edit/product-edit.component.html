@@ -9,27 +9,15 @@
 		<div class="card-body" *ngIf="product">
 			<div class="row">
 				<div class="col-md-8">
-					<label class="form-label" class="row">
+					<div class="form-label" class="row">
 						<div class="col-md-4">Name:</div>
 						<div class="col-md-8">{{ product.productName }}</div>
-					</label>
-					<input
-						class="form-control"
-						required="required"
-						#name="ngModel"
-						type="text"
-						id="productName"
-						value=""
-						name="productName"
-						pattern="[A-Za-zéàáèý]{1,15}"
-						[(ngModel)]="product.productName"
-					/>
+					</div>
 					<div class="row">
 						<div class="col-md-4">Code:</div>
 						<div class="col-md-8">
-							{{product.productCode}}
-							<!-- {{ product.productCode | lowercase |
-                        convertToSpaces: "-" }} -->
+							{{ product.productCode | lowercase |
+							convertToSpaces: "-" }}
 						</div>
 					</div>
 					<div class="row">
@@ -44,20 +32,28 @@
 						<label class="col-md-4 form-label" for="price">
 							Price:
 						</label>
-						<div class="col-md-8">
-							{{ product.price | currency: "USD":"symbol":"1.2-2"
-							}}
+						<div class="col-md-2">
+							<input
+								class="form-control"
+								required="required"
+								#price="ngModel"
+								type="text"
+								id="price"
+								value=""
+								name="price"
+								pattern="^\d+(?:\.\d{0,2})?"
+								[(ngModel)]="product.price"
+								[class.error]="price.invalid && price.touched"
+							/>
+							<div
+								[hidden]="price.valid || price.pristine"
+								class="alert alert-danger"
+							>
+								<p class="invalid">
+									Please, enter a valid price.
+								</p>
+							</div>
 						</div>
-						<input
-							class="form-control"
-							#price="ngModel"
-							type="text"
-							id="price"
-							value=""
-							name="price"
-							pattern="\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})"
-							[(ngModel)]="product.price"
-						/>
 					</div>
 					<div class="row">
 						<div class="col-md-8">
@@ -76,7 +72,28 @@
 						[matTooltip]="product.productName"
 					/>
 				</div>
+				<div class="card-footer">
+					<button
+						class="btn btn-outline-secondary"
+						style="width: 80px"
+						(click)="onBack()"
+						matTooltip="Click to go back"
+					>
+						<i class="fa fa-chevron-left"></i>
+						Back
+					</button>
+					<button
+						class="btn btn-outline-secondary"
+						style="width: 150px"
+						(click)="onSubmit()"
+						matTooltip="Submit"
+					>
+						Submit
+					</button>
+				</div>
 			</div>
 		</div>
 	</form>
 </div>
+
+<ng-template #loader> Loading ... waiting for product </ng-template>
