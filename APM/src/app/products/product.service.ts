@@ -11,7 +11,7 @@ import { catchError, tap, map } from "rxjs/operators";
 export class ProductService {
 	[x: string]: any;
 	private productUrl = 'http://localhost:9001/products';
-  	private productUrlEdit = 'http://localhost:9001/upadteProduct';
+  	private productUrlEdit = 'http://localhost:9001/updateProduct/:id';
 
 	constructor(private http: HttpClient) {}
 
@@ -37,8 +37,6 @@ export class ProductService {
 		this.getProducts().pipe(
 			map((products: IProduct[]) => 
 				{
-					
-					
 					let productToUpdate = products.find((p) => p.productId === id)
 					productToUpdate!.productName = s;
 					console.log(productToUpdate);
@@ -48,10 +46,10 @@ export class ProductService {
 		);
 	} 
 
-/*	updateFriend(product: IProduct, updatedProduct: IProduct): Observable<any> {
+	updateFriend(product: IProduct, updatedProduct: IProduct): Observable<any> {
 		updatedProduct.productId = product.productId;
 		return this.http.post(this.productUrlEdit, updatedProduct);
-	  }*/
+	  }
 
 	private handleError(err: HttpErrorResponse) {
 		let errorMessage = "";

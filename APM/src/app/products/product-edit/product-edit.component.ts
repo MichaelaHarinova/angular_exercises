@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { IProduct } from "../product";
 import { ProductService } from "../product.service";
+import { ProductDetailComponent } from "..";
 
 @Component({
   selector: 'pm-product-edit',
@@ -11,6 +12,7 @@ import { ProductService } from "../product.service";
 export class ProductEditComponent {
   product!: IProduct
   pageTitle = "Edit Product";
+  errorMessage = "";
 
 
   constructor(
@@ -19,22 +21,32 @@ export class ProductEditComponent {
 		private productService: ProductService
 	)  { 
     const id = Number(this.route.snapshot.paramMap.get("id"));
+    console.log(id);
+    if(id){
+      this.ngOnInit(id)
+    }else{
+      this.ngOnInit(2)
+    }
   }
 
-  ngOnInit(): void {
-  }
-
-
-	public async onEdit(product: IProduct): Promise<any>{
-		this.productService.onEdit(product, this.product).subscribe
-	  }
+  ngOnInit(id: number): void {
+      this.productService.getProduct(id).subscribe({
+        next: (product) => (product ? (this.product = product) : null),
+        error: (err) => (this.errorMessage = err)
+      });
+    }
+  
+  
+  onBack(): void {
+      this.router.navigate(["/products"]).then((r) => console.log());
+    }
 	
-    onSubmit(): void {
-      this.productService.addFriend(this.product).subscribe
-      (this.getRequest('http://localhost:9001/upadteProduct').then(res => console.log(this.product)), console.error());
+  onSubmit(): void {
+      this.productService.upadteProduct(this.product.productId).subscribe
+      (this.getRequest('http://localhost:9001/updateProduct').then(res => console.log(this.product.productId)), console.error());
     }
 
-    async getRequest(url: string): Promise<any> {
+  async getRequest(url: string): Promise<any> {
       // custom getter
       await fetch(url, {
         method: 'GET',
