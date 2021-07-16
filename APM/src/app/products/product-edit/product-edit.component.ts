@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { IProduct } from "../product";
 import { ProductService } from "../product.service";
-import { ProductDetailComponent } from "..";
+import { productImpl } from "../productImpl";
 
 @Component({
   selector: 'pm-product-edit',
@@ -10,10 +10,11 @@ import { ProductDetailComponent } from "..";
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent {
+  editedProduct = new productImpl();
   product!: IProduct
   pageTitle = "Edit Product";
   errorMessage = "";
-
+  
 
   constructor(
 		private route: ActivatedRoute,
@@ -21,18 +22,18 @@ export class ProductEditComponent {
 		private productService: ProductService
 	)  { 
     const id = Number(this.route.snapshot.paramMap.get("id"));
-    console.log(id);
     if(id){
-      this.ngOnInit(id)
+      this.getProductToEdit(id)
     }else{
-      this.ngOnInit(2)
+      this.getProductToEdit(2)
     }
   }
 
-  ngOnInit(id: number): void {
+  getProductToEdit(id: number): void {
       this.productService.getProduct(id).subscribe({
         next: (product) => (product ? (this.product = product) : null),
         error: (err) => (this.errorMessage = err)
+
       });
     }
   
@@ -41,14 +42,18 @@ export class ProductEditComponent {
       this.router.navigate(["/products"]).then((r) => console.log());
     }
 	
-  onSubmit(): void {
-      this.productService.upadteProduct(this.product.productId).subscribe
-      (this.getRequest('http://localhost:9001/editProduct').then(res => console.log(this.product.productId)), console.error());
+  onSubmit(newPrice: number): void {
+      this.editedProduct = this.product;
     }
 
-  async getRequest(url: string): Promise<any> {
+    public async submitProduct(product: IProduct): Promise<any> {
+      this.productService.submitProduct(product, this.product).subscribe
+      (response => console.log());
+    }
+ 
+    async getRequest(): Promise<any> {
       // custom getter
-      await fetch(url, {
+      await fetch('http://localhost:9001/editProduct', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
