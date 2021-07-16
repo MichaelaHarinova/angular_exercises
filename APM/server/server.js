@@ -1,13 +1,13 @@
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-
+const cors = require('cors');
 const PORT = 9001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.all("/*", function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -16,23 +16,6 @@ app.all("/*", function (req, res, next) {
   next();
 });
 
-app.listen(PORT, function () {
-});
-
-app.post('/editProduct', function (request, response) {
-  console.log(request.body);
-  Product.replaceOne({ id: request.body.id }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
-  });
-
-app.get('/products', function (request, response) {
-  Product.find().then(products => response.status(200).send(products));
-  });
-
-
-
-
-
-/* Mongoose */
 const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
   productId: Number,
@@ -61,3 +44,15 @@ db.once('open', function () {
 
   Product.find().then(response => console.log(response, 'products found'));
 });
+
+app.get('/products', function (request, response) {
+  Product.find().then(products => response.status(200).send(products));
+  });
+
+app.post('/editProduct', function (request, response) {
+  Product.replaceOne({ productId: request.body.productId }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
+  });
+
+
+
+

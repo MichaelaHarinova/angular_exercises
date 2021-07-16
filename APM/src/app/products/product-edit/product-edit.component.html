@@ -4,7 +4,7 @@
 		class="row gx-3 gy-2 align-items-center"
 		#formName="ngForm"
 		novalidate
-		(ngSubmit)="onSubmit()"
+		(ngSubmit)="onSubmit(product.price)"
 	>
 		<div class="card-body" *ngIf="product">
 			<div class="row">
@@ -85,7 +85,7 @@
 					<button
 						class="btn btn-outline-secondary"
 						style="width: 150px"
-						(click)="onSubmit()"
+						(click)="submitProduct(product)"
 						matTooltip="Submit"
 					>
 						Submit
