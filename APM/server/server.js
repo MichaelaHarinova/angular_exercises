@@ -19,7 +19,7 @@ app.all("/*", function (req, res, next) {
 app.listen(PORT, function () {
 });
 
-app.post('/updateProduct', function (request, response) {
+app.post('/editProduct', function (request, response) {
   console.log(request.body);
   Product.replaceOne({ id: request.body.id }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
   });

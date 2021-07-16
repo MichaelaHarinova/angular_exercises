@@ -39,9 +39,9 @@ export class ProductDetailComponent  {
 		this.router.navigate(["/products"]).then((r) => console.log());
 	}
 
-    onEdit(): void {	
+    onEdit(productId: number): void {	
 	
-			this.router.navigate(["/updateProduct/" + Number(this.route.snapshot.paramMap.get("id"))]).then((r) => console.log());
+		this.router.navigate(["/editProduct", productId]).then((r) => console.log());
 	  }
 	
 	}

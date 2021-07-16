@@ -43,7 +43,7 @@ export class ProductEditComponent {
 	
   onSubmit(): void {
       this.productService.upadteProduct(this.product.productId).subscribe
-      (this.getRequest('http://localhost:9001/updateProduct').then(res => console.log(this.product.productId)), console.error());
+      (this.getRequest('http://localhost:9001/editProduct').then(res => console.log(this.product.productId)), console.error());
     }
 
   async getRequest(url: string): Promise<any> {

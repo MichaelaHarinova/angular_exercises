@@ -65,10 +65,11 @@
 			<button
 				class="btn btn-outline-secondary"
 				style="width: 150px"
-				(click)="onEdit()"
+				(click)="onEdit(product.productId)"
 				matTooltip="Edit product"
+				[routerLink]="['/editProduct', product.productId]"
 			>
-				Edit Product
+				Edit {{ product.productName }}
 			</button>
 		</div>
 	</div>
