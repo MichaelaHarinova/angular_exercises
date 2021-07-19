@@ -5,6 +5,11 @@ const app = express();
 const cors = require('cors');
 const PORT = 9001;
 
+app.use(cors({
+  origin: true,
+  methods: 'POST,GET,PUT,OPTIONS,DELETE' 
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -53,6 +58,8 @@ app.post('/editProduct', function (request, response) {
   Product.replaceOne({ productId: request.body.productId }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
   });
 
+  console.log("server check")
 
 
-
+  app.listen(PORT, function () {
+  });
