@@ -44,6 +44,7 @@ export class ProductEditComponent {
 	
   onSubmit(newPrice: number): void {
       this.editedProduct = this.product;
+      this.router.navigate(["/products/" + this.product.productId]).then((r) => console.log());
     }
 
     public async submitProduct(product: IProduct): Promise<any> {
