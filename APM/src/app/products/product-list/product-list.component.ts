@@ -64,7 +64,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	sub!: Subscription;
 
 
-	  
+      products: IProduct[] = [];
 	  filteredProducts: IProduct[] = [];
 	 
 	  getRemoteData() {
@@ -127,12 +127,26 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	  });
 	}
 
+	performFilter(filterBy: string): IProduct[] {
+		filterBy = filterBy.toLocaleLowerCase();
+		return this.products.filter((product: IProduct) =>
+			product.productName.toLocaleLowerCase().includes(filterBy)
+		);
+	}
+	
 	ngOnInit(): void {
 		this.getRemoteData();
 
 		// Overrride default filter behaviour of Material Datatable
 		this.dataSource.filterPredicate = this.createFilter();
 	  
+		this.sub = this.productService.getProducts().subscribe({
+			next: (products) => {
+				this.products = products;
+				this.filteredProducts = this.products;
+			},
+			error: (err) => (this.errorMessage = err)
+		});
 		}
 
 
