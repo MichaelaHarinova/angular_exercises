@@ -8,19 +8,22 @@ import { ConvertToSpacesPipe } from "./pipes/convert-to-spaces.pipe";
 import { StarComponent } from "./components/star/star.component";
 
 
+
 @NgModule({
 	declarations: [
 		// Components
 		StarComponent,
 		BicolorButtonComponent,
+
 		// Pipes
-		ConvertToSpacesPipe
+		ConvertToSpacesPipe,
 	],
 
 	exports: [
 		// Components
 		StarComponent,
 		BicolorButtonComponent,
+
 		// Pipes
 		ConvertToSpacesPipe
 	],
