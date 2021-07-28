@@ -66,96 +66,37 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
       products: IProduct[] = [];
 	  filteredProducts: IProduct[] = [];
-	 
-	  getRemoteData() {
-	  const productsArray = [
-			{
-			  "productId": 1,
-			  "productName": "Leaf Rake",
-			  "productCode": "GDN-0011",
-			  "releaseDate": "March 19, 2021",
-			  "description": "Leaf rake with 48-inch wooden handle.",
-			  "price": 19.95,
-			  "starRating": 3.2,
-			  "imageUrl": "assets/images/leaf_rake.png"
-			},
-			{
-			  "productId": 2,
-			  "productName": "Garden Cart",
-			  "productCode": "GDN-0023",
-			  "releaseDate": "March 18, 2021",
-			  "description": "15 gallon capacity rolling garden cart",
-			  "price": 32.99,
-			  "starRating": 4.2,
-			  "imageUrl": "assets/images/garden_cart.png"
-			},
-			{
-			  "productId": 5,
-			  "productName": "Hammer",
-			  "productCode": "TBX-0048",
-			  "releaseDate": "May 21, 2021",
-			  "description": "Curved claw steel hammer",
-			  "price": 8.9,
-			  "starRating": 4.8,
-			  "imageUrl": "assets/images/hammer.png"
-			},
-			{
-			  "productId": 8,
-			  "productName": "Saw",
-			  "productCode": "TBX-0022",
-			  "releaseDate": "May 15, 2021",
-			  "description": "15-inch steel blade hand saw",
-			  "price": 11.55,
-			  "starRating": 3.7,
-			  "imageUrl": "assets/images/saw.png"
-			},
-			{
-			  "productId": 10,
-			  "productName": "Video Game Controller",
-			  "productCode": "GMG-0042",
-			  "releaseDate": "October 15, 2020",
-			  "description": "Standard two-button video game controller",
-			  "price": 35.95,
-			  "starRating": 4.6,
-			  "imageUrl": "assets/images/xbox-controller.png"
-			}
-	  ];
-	  this.dataSource.data = productsArray;
 
-	  this.filterSelectObj.filter((o: any) => {
-		o.options = this.getFilterObject(productsArray, o.columnProp);
-	  });
-	}
-
-	performFilter(filterBy: string): IProduct[] {
-		filterBy = filterBy.toLocaleLowerCase();
-		return this.products.filter((product: IProduct) =>
-			product.productName.toLocaleLowerCase().includes(filterBy)
-		);
-	}
-	
-	ngOnInit(): void {
+	  ngOnInit(): void {
 		this.getRemoteData();
-
+console.log("init")
 		// Overrride default filter behaviour of Material Datatable
 		this.dataSource.filterPredicate = this.createFilter();
-	  
-		this.sub = this.productService.getProducts().subscribe({
-			next: (products) => {
-				this.products = products;
-				this.filteredProducts = this.products;
-			},
-			error: (err) => (this.errorMessage = err)
-		});
+		
 		}
+	 
+	  getRemoteData() {
+	 let productsArray: any;
+	  this.sub = this.productService.getProducts().subscribe({
+		next: (products) => {
+			productsArray = products;
+			this.filteredProducts = this.products;
+			this.dataSource.data = productsArray;
 
+			this.filterSelectObj.filter((o: any) => {
+			  o.options = this.getFilterObject(productsArray, o.columnProp);
+			});
+		},
+		error: (err) => (this.errorMessage = err)
+	});
+	
+	}
 
 		getFilterObject(fullObj: any, key: any) {
 			const uniqChk: any[] = [];
 			fullObj.filter((obj: any) => {
 			  if (!uniqChk.includes(obj[key])) {
 				uniqChk.push(obj[key]);
-				console.log("test2");
 			  }
 			  return obj;
 			});
@@ -211,16 +152,25 @@ export class ProductListComponent implements OnInit, OnDestroy {
       console.log(searchTerms);
 
       let nameSearch = () => {
+		  console.log("nameSearch")
         let found = false;
+		let matches: boolean []= [];
         if (isFilterSet) {
           for (const col in searchTerms) {
-            searchTerms[col].trim().toLowerCase().split(' ').forEach((word: any) => {
-              if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) {
-                found = true
+			  matches.push(false);
+            searchTerms[col].trim().toLowerCase().split(' ').forEach((word: any, index: number) => {
+              if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) { 
+                matches[matches.length -1] = true
               }
             });
           }
-          return found
+		  let numberOfNoMatches = matches.filter(e => e === false);
+		  console.log(matches)
+		  if(numberOfNoMatches.length > 0){
+			return false
+		  }else{
+			  return true
+		  }
         } else {
           return true;
         }

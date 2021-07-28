@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 	providedIn: "root"
 })
 export class ProductService {
-	private productUrl = 'api/products/products.json';
+	private productUrl = 'http://localhost:9001/products';
   	private productUrlEdit = 'http://localhost:9001/editProduct';
 	  
 
@@ -23,6 +23,7 @@ export class ProductService {
 			tap((data) => console.log((data))),
 			catchError(this.handleError)
 		);
+		
 	}
 
 	getProduct(id: number): Observable<IProduct | undefined> {
@@ -49,14 +50,5 @@ export class ProductService {
 		return throwError(errorMessage);
 	}
 
-	getFilterObject(fullObj: any, key: any) {
-		const uniqChk: any[] = [];
-		fullObj.filter((obj: any) => {
-		  if (!uniqChk.includes(obj[key])) {
-			uniqChk.push(obj[key]);
-		  }
-		  return obj;
-		});
-		return uniqChk;
-	  }
+
 }

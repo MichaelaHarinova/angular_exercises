@@ -18,7 +18,14 @@ thead {
 .table-head-w{
 width: 15%;
 }
+.filterMargin{
+  margin-left: 15px;
+}
 
+mat-form-field.mat-form-field {
+  font-size: 14px;
+  margin-left: 50px;
+}
 .mat-column-productName{
   width: 10px;
   max-width: 15px;
