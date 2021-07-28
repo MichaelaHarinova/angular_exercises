@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 export class ProductService {
 	private productUrl = 'http://localhost:9001/products';
   	private productUrlEdit = 'http://localhost:9001/editProduct';
+	private productUrlSearch =  'http://localhost:9001/search';
 	  
 
 	constructor(private http: HttpClient) {}
@@ -38,6 +39,7 @@ export class ProductService {
 		editProduct.productId = product.productId;
 		return this.http.post(this.productUrlEdit, editProduct);
 	  }
+
 
 	private handleError(err: HttpErrorResponse) {
 		let errorMessage = "";

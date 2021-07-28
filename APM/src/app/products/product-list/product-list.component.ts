@@ -17,6 +17,10 @@ import { forEach } from "lodash";
 	styleUrls: ["./product-list.component.css"]
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+
+
+	filterSelectObj: any = [];
+
 	constructor(
 		private productService: ProductService,
 		private _snackBar: MatSnackBar
@@ -52,7 +56,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	dataSource = new MatTableDataSource();
     displayedColumns: string[] = [ 'imageUrl','productName', 'productCode', 'releaseDate', 'price', 'starRating'];
 
-	filterSelectObj: any = [];
+	products: IProduct[] = [];
+	filteredProducts: IProduct[] = [];
 	
 	durationInSeconds = 3;
 	pageTitle = "Product List";
@@ -64,19 +69,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	sub!: Subscription;
 
 
-      products: IProduct[] = [];
-	  filteredProducts: IProduct[] = [];
+      
 
 	  ngOnInit(): void {
+
 		this.getRemoteData();
-console.log("init")
+
 		// Overrride default filter behaviour of Material Datatable
 		this.dataSource.filterPredicate = this.createFilter();
-		
 		}
-	 
+
+	 //fetching firs data/filtered data into the table
 	  getRemoteData() {
-	 let productsArray: any;
+
+	  let productsArray: any;
 	  this.sub = this.productService.getProducts().subscribe({
 		next: (products) => {
 			productsArray = products;
@@ -141,6 +147,7 @@ console.log("init")
     let filterFunction = function (data: any, filter: string): boolean {
       let searchTerms = JSON.parse(filter);
       let isFilterSet = false;
+	  
       for (const col in searchTerms) {
         if (searchTerms[col].toString() !== '') {
           isFilterSet = true;
@@ -149,11 +156,9 @@ console.log("init")
         }
       }
 
-      console.log(searchTerms);
 
       let nameSearch = () => {
-		  console.log("nameSearch")
-        let found = false;
+      
 		let matches: boolean []= [];
         if (isFilterSet) {
           for (const col in searchTerms) {
