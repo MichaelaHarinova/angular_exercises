@@ -14,3 +14,39 @@ thead {
   cursor: pointer;
   color:#298279;
 }
+
+.table-head-w{
+width: 15%;
+}
+.filterMargin{
+  margin-left: 15px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 14px;
+  margin-left: 50px;
+}
+.mat-column-productName{
+  width: 10px;
+  max-width: 15px;
+}
+.mat-column-productCode{
+  width: 10px;
+  max-width: 15px;
+}
+.mat-column-price{
+  width: 10px;
+  max-width: 15px;
+}
+.mat-column-releaseDate{
+  width: 10px;
+  max-width: 15px;
+}
+.mat-column-starRating{
+  width: 10px;
+  max-width: 15px;
+}
+.mat-column-imageUrl{
+  width: 10px;
+  max-width: 10px;
+}

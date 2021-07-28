@@ -22,6 +22,7 @@ app.all("/*", function (req, res, next) {
 });
 
 const mongoose = require('mongoose');
+const { request } = require('http');
 const productSchema = new mongoose.Schema({
   productId: Number,
 	productName: String,
@@ -48,18 +49,19 @@ db.on('error', function (err) {
 db.once('open', function () {
 
   Product.find().then(response => console.log(response, 'products found'));
+
 });
 
 app.get('/products', function (request, response) {
   Product.find().then(products => response.status(200).send(products));
   });
 
+
 app.post('/editProduct', function (request, response) {
   Product.replaceOne({ productId: request.body.productId }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
   });
 
-  console.log("server check")
 
 
-  app.listen(PORT, function () {
+app.listen(PORT, function () {
   });

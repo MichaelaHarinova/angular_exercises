@@ -1,17 +1,23 @@
 import { NgModule } from "@angular/core";
-import { ProductListComponent } from "../products/product-list/product-list.component";
-import { ProductDetailComponent } from "../products/product-detail/product-detail.component";
 import { SharedModule } from "../shared/shared.module";
-import { TooltipComponent } from "../shared/components";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { CommonModule } from "@angular/common";
 import { ProductRoutingModule } from "./product-routing.module";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductListComponent } from "../products/product-list/product-list.component";
+import { ProductDetailComponent } from "../products/product-detail/product-detail.component";
+
+import { TooltipComponent } from "../shared/components";
 
 
-//import {SnackBarComponent} from '../shared/snack-bar.component';
+
 
 @NgModule({
 	declarations: [
@@ -24,9 +30,17 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 	imports: [
 		ProductRoutingModule,
 		CommonModule,
-		MatTooltipModule,
 		SharedModule,
-		FormsModule
+
+		MatTooltipModule,
+		MatButtonModule,
+		MatInputModule,
+		MatTableModule,
+		MatSelectModule,
+		
+		FormsModule,
+		ReactiveFormsModule,	
 	]
+	
 })
 export class ProductModule {}

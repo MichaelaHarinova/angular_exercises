@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap, map } from "rxjs/operators";
 import { productImpl } from "./productImpl";
+import * as _ from 'lodash';
 
 
 @Injectable({
@@ -12,15 +13,18 @@ import { productImpl } from "./productImpl";
 export class ProductService {
 	private productUrl = 'http://localhost:9001/products';
   	private productUrlEdit = 'http://localhost:9001/editProduct';
+	private productUrlSearch =  'http://localhost:9001/search';
 	  
 
 	constructor(private http: HttpClient) {}
+	
 
 	getProducts(): Observable<IProduct[]> {
 		return this.http.get<IProduct[]>(this.productUrl).pipe(
-			tap((data) => console.log("All:", JSON.stringify(data))),
+			tap((data) => console.log((data))),
 			catchError(this.handleError)
 		);
+		
 	}
 
 	getProduct(id: number): Observable<IProduct | undefined> {
@@ -36,6 +40,7 @@ export class ProductService {
 		return this.http.post(this.productUrlEdit, editProduct);
 	  }
 
+
 	private handleError(err: HttpErrorResponse) {
 		let errorMessage = "";
 		if (err.error instanceof ErrorEvent) {
@@ -46,4 +51,6 @@ export class ProductService {
 		console.error(errorMessage);
 		return throwError(errorMessage);
 	}
+
+
 }
