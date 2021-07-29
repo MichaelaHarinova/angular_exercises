@@ -17,8 +17,24 @@ import { forEach } from "lodash";
 	styleUrls: ["./product-list.component.css"]
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+	
+	pageTitle = "Product List";
 
+	durationInSeconds = 3;
+	imageWidth = 50;
+	imageMargin = 2;
+	showImage = true;
+	buttonActive = true;
+	errorMessage = "";
+	
+	sub!: Subscription;
 
+	dataSource = new MatTableDataSource();
+	filterValues: any = {};
+    displayedColumns: string[] = [ 'imageUrl','productName', 'productCode', 'releaseDate', 'price', 'starRating'];
+
+	products: IProduct[] = [];
+	filteredProducts: IProduct[] = [];
 	filterSelectObj: any = [];
 
 	constructor(
@@ -48,66 +64,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
 			  name: 'Star Rating',
 			  columnProp: 'starRating',
 			  options: []
-			  }
-		  ]
+			}
+		]
 	}
 	
-	filterValues: any = {};
-	dataSource = new MatTableDataSource();
-    displayedColumns: string[] = [ 'imageUrl','productName', 'productCode', 'releaseDate', 'price', 'starRating'];
 
-	products: IProduct[] = [];
-	filteredProducts: IProduct[] = [];
-	
-	durationInSeconds = 3;
-	pageTitle = "Product List";
-	imageWidth = 50;
-	imageMargin = 2;
-	showImage = true;
-	buttonActive = true;
-	errorMessage = "";
-	sub!: Subscription;
+	ngOnInit(): void {
 
-
-      
-
-	  ngOnInit(): void {
-
-		this.getRemoteData();
-
+	   this.getRemoteData();
 		// Overrride default filter behaviour of Material Datatable
 		this.dataSource.filterPredicate = this.createFilter();
-		}
-
-	 //fetching firs data/filtered data into the table
-	  getRemoteData() {
-
-	  let productsArray: any;
-	  this.sub = this.productService.getProducts().subscribe({
-		next: (products) => {
-			productsArray = products;
-			this.filteredProducts = this.products;
-			this.dataSource.data = productsArray;
-
-			this.filterSelectObj.filter((o: any) => {
-			  o.options = this.getFilterObject(productsArray, o.columnProp);
-			});
-		},
-		error: (err) => (this.errorMessage = err)
-	});
-	
 	}
-
-		getFilterObject(fullObj: any, key: any) {
-			const uniqChk: any[] = [];
-			fullObj.filter((obj: any) => {
-			  if (!uniqChk.includes(obj[key])) {
-				uniqChk.push(obj[key]);
-			  }
-			  return obj;
-			});
-			return uniqChk;
-		  }
 		  
 	ngOnDestroy() {
 		this.sub.unsubscribe();
@@ -132,66 +99,99 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	}
 
 
-  // Called on Filter change
-  filterChange(filter: any, event: any){
+    // Called on Filter change
+    filterChange(filter: any, event: any) {
 
-		//let filterValues = {}
 		this.filterValues[filter.columnProp] = event.target.value.trim().toLowerCase()
 		this.dataSource.filter = JSON.stringify(this.filterValues)
-	  }
+	}
   
 
 
-  // Custom filter method fot Angular Material Datatable
-  createFilter() {
-    let filterFunction = function (data: any, filter: string): boolean {
-      let searchTerms = JSON.parse(filter);
-      let isFilterSet = false;
+    // Custom filter method fot Angular Material Datatable
+    createFilter() {
+        let filterFunction = function (data: any, filter: string): boolean {
+            let searchTerms = JSON.parse(filter);
+            let isFilterSet = false;
 	  
-      for (const col in searchTerms) {
-        if (searchTerms[col].toString() !== '') {
-          isFilterSet = true;
-        } else {
-          delete searchTerms[col];
-        }
-      }
+            for (const col in searchTerms) {
+               if (searchTerms[col].toString() !== '') {
+                isFilterSet = true;
+               } else {
+                delete searchTerms[col];
+               }
+            }
 
-
-      let nameSearch = () => {
-      
-		let matches: boolean []= [];
-        if (isFilterSet) {
-          for (const col in searchTerms) {
-			  matches.push(false);
-            searchTerms[col].trim().toLowerCase().split(' ').forEach((word: any, index: number) => {
-              if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) { 
-                matches[matches.length -1] = true
-              }
-            });
-          }
-		  let numberOfNoMatches = matches.filter(e => e === false);
-		  console.log(matches)
-		  if(numberOfNoMatches.length > 0){
-			return false
-		  }else{
-			  return true
-		  }
-        } else {
-          return true;
+            let nameSearch = () => {
+	    	    let matches: boolean []= [];
+                if (isFilterSet) {
+                    for (const col in searchTerms) {
+			            matches.push(false);
+                        searchTerms[col].trim().toLowerCase().split(' ').forEach((word: any, index: number) => {
+                            if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) { 
+                             matches[matches.length -1] = true
+                            }
+                        });
+                    }
+		            let numberOfNoMatches = matches.filter(e => e === false);
+		        	if(numberOfNoMatches.length > 0){
+			         return false
+		            } else {
+			         return true
+		            }
+                } else {
+                 return true;
+                }
+            } 
+          return nameSearch()
         }
-      }
-      return nameSearch()
+      return filterFunction
     }
-    return filterFunction
-  }
-  // Reset table filters
-  resetFilters() {
-    this.filterValues = {}
-    this.filterSelectObj.forEach((value: any) => {
-      value.modelValue = undefined;
-    })
-    this.dataSource.filter = "";
-  }
+
+
+    // Reset table filters
+    resetFilters() {
+
+        this.filterValues = {}
+        this.filterSelectObj.forEach((value: any) => {
+          value.modelValue = undefined;
+        })
+        this.dataSource.filter = "";  
+    }
+
+
+    getFilterObject(fullObj: any, key: any) {
+
+	    const uniqChk: any[] = [];
+	    fullObj.filter((obj: any) => {
+	      if (!uniqChk.includes(obj[key])) {
+		    uniqChk.push(obj[key]);
+	    }
+	  return obj;
+	  });
+	  return uniqChk;
+    }
+
+
+    //fetching firs data/filtered data into the table
+    getRemoteData() {
+
+		let productsArray: any;
+		this.sub = this.productService.getProducts().subscribe({
+		  next: (products) => {
+			  productsArray = products;
+			  this.filteredProducts = this.products;
+			  this.dataSource.data = productsArray;
+  
+			  this.filterSelectObj.filter((o: any) => {
+				o.options = this.getFilterObject(productsArray, o.columnProp);
+			  });
+		  },
+		  error: (err) => (this.errorMessage = err)
+		});
+	  
+	}
+  
 }
 
 
