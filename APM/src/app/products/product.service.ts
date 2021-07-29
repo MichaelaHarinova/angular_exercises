@@ -24,22 +24,24 @@ export class ProductService {
 			tap((data) => console.log((data))),
 			catchError(this.handleError)
 		);
-		
 	}
 
 	getProduct(id: number): Observable<IProduct | undefined> {
 		return this.getProducts().pipe(
 			map((products: IProduct[]) => {
-				return products.find((p) => p.productId === id)}	
-			)
+				return products.find((p) => p.productId === id)
+			})
 		);
 	}
 
 	submitProduct(product: IProduct, editProduct: productImpl): Observable<any> {
 		editProduct.productId = product.productId;
 		return this.http.post(this.productUrlEdit, editProduct);
-	  }
+	}
 
+	getFilteredProduct(searchTerms: object): Observable<any> {
+		return this.http.post(this.productUrlSearch, searchTerms);
+	}  
 
 	private handleError(err: HttpErrorResponse) {
 		let errorMessage = "";
@@ -51,6 +53,4 @@ export class ProductService {
 		console.error(errorMessage);
 		return throwError(errorMessage);
 	}
-
-
 }
