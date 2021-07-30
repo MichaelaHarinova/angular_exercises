@@ -21,10 +21,7 @@
 		<button mat-flat-button color="warn" (click)="resetFilters()">
 			Reset
 		</button>
-		<mat-form-field
-			class="mat-form-field"
-			*ngFor="let filter of filterSelectObj"
-		>
+		<mat-form-field *ngFor="let filter of filterSelectObj">
 			<mat-label>Filter {{filter.name}}</mat-label>
 			<select
 				matNativeControl
@@ -44,10 +41,13 @@
 		</mat-form-field>
 		&nbsp;
 	</div>
-	<table class="table-responsive" mat-table [dataSource]="dataSource">
+	<mat-table
+		class="table-responsive mat-elevation-z8"
+		[dataSource]="dataSource"
+	>
 		<ng-container matColumnDef="imageUrl">
-			<th mat-header-cell *matHeaderCellDef>Image</th>
-			<td mat-cell *matCellDef="let product">
+			<mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+			<mat-cell *matCellDef="let product" class="image-cell">
 				<img
 					*ngIf="showImage"
 					[src]="product.imageUrl"
@@ -55,128 +55,53 @@
 					[style.margin.px]="imageMargin"
 					[matTooltip]="product.productName"
 				/>
-			</td>
+			</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="productName">
-			<th mat-header-cell *matHeaderCellDef>Name</th>
-			<td mat-cell *matCellDef="let product">
+			<mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+			<mat-cell *matCellDef="let product">
 				<a [routerLink]="['/products', product.productId]">
 					{{ product.productName }}
 				</a>
-			</td>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="productCode">
-			<th mat-header-cell *matHeaderCellDef>Code</th>
-			<td mat-cell *matCellDef="let product">
+			<mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
+			<mat-cell *matCellDef="let product">
 				{{ product.productCode | lowercase | convertToSpaces: "-" }}
-			</td>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="releaseDate">
-			<th mat-header-cell *matHeaderCellDef>Available</th>
-			<td mat-cell *matCellDef="let product">
+			<mat-header-cell *matHeaderCellDef>Available</mat-header-cell>
+			<mat-cell *matCellDef="let product">
 				{{ product.releaseDate }}
-			</td>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="price">
-			<th mat-header-cell *matHeaderCellDef>Price</th>
-			<td mat-cell *matCellDef="let product">
+			<mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+			<mat-cell *matCellDef="let product">
 				{{ product.price | currency:"USD":"symbol":"1.2-2"}}
-			</td>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="starRating">
-			<th mat-header-cell *matHeaderCellDef>Rating</th>
-			<td mat-cell *matCellDef="let product">
+			<mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
+			<mat-cell *matCellDef="let product">
 				{{product.starRating}}
 				<pm-star
 					[rating]="product.starRating"
 					(ratingClicked)="onRatingClicked($event)"
 				></pm-star>
-			</td>
+			</mat-cell>
 		</ng-container>
 
-		<tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-	</table>
-
-	<!--
-	<div class="card-body color">
-		<div class="row">
-			<div class="col-md-2">Filter by:</div>
-			<div class="col-md-4">
-				<label>
-					<input type="text" [(ngModel)]="listFilter" />
-				</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="col-md-4">Filtered by:{{ listFilter }}</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="col-md-4">Advanced filter</div>
-			</div>
-		</div>
-		<div class="table-responsive">
-			<table class="table" *ngIf="products.length">
-				<thead>
-					<tr>
-						<th>
-							<button
-								class="btn buttonItems"
-								(click)="toggleImage()"
-								matTooltip="Click to see or hide images of products"
-							>
-								{{ showImage ? "Hide" : "Show" }} Image
-							</button>
-						</th>
-						<th>Product</th>
-						<th>Code</th>
-						<th>Available</th>
-						<th>Price</th>
-						<th>5 Star Rating</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let product of filteredProducts">
-						<td>
-							<img
-								*ngIf="showImage"
-								[src]="product.imageUrl"
-								[style.width.px]="imageWidth"
-								[style.margin.px]="imageMargin"
-								[matTooltip]="product.productName"
-							/>
-							 [title]="product.productName | uppercase"
-						</td>
-						<td>
-							<a [routerLink]="['/products', product.productId]">
-								{{ product.productName }}
-							</a>
-						</td>
-						<td>
-							{{ product.productCode | lowercase |
-							convertToSpaces: "-" }}
-						</td>
-						<td>{{ product.releaseDate }}</td>
-						<td>
-							{{ product.price | currency:"USD":"symbol":"1.2-2"}}
-						</td>
-						<td>
-							<pm-star
-								[rating]="product.starRating"
-								(ratingClicked)="onRatingClicked($event)"
-							></pm-star>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>-->
+		<mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+		<mat-row
+			*matRowDef="let row; columns: displayedColumns;"
+			(click)="onRowClicked(row)"
+		></mat-row>
+	</mat-table>
 </div>
