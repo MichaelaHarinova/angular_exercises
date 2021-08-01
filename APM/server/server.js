@@ -53,17 +53,13 @@ db.once('open', function () {
 });
 
 app.get('/products', function (request, response) {
-  Product.find().then(products => response.status(200).send(products));
+  Product.find(request.query).then(products => response.status(200).send(products));
   });
 
-app.post('/search', function (request, response) {
- Product.find(request.body).then(products => response.status(200).send(products));
- });
 
 app.post('/editProduct', function (request, response) {
   Product.replaceOne({ productId: request.body.productId }, request.body).then(r =>response.status(200).send({"message": "Data updated"}));
   });
-
 
 
 app.listen(PORT, function () {

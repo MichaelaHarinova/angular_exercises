@@ -7,10 +7,7 @@ import { IProduct } from "../product";
 import { ProductService } from "../product.service";
 import { Subscription } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MatTableDataSource } from '@angular/material/table';
-import { forEach } from "lodash";
-
-
+import { ProductsDataSource } from "../products-dataSource";
 
 @Component({
 	templateUrl: "./product-list.component.html",
@@ -29,7 +26,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	
 	sub!: Subscription;
 
-	dataSource = new MatTableDataSource();
+	dataSource: any = ProductsDataSource;
 	filterValues: any = {};
     displayedColumns: string[] = [ 'imageUrl','productName', 'productCode', 'releaseDate', 'price', 'starRating'];
 
@@ -70,10 +67,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	
 
 	ngOnInit(): void {
-
-	   this.getRemoteData();
-		// Overrride default filter behaviour of Material Datatable
-		this.dataSource.filterPredicate = this.createFilter();
+	 // this.dataSource.filterPredicate = this.createFilter();
+		this.dataSource = new ProductsDataSource(this.productService);
+		this.products = this.dataSource.loadProducts({},(products: IProduct[]) => {this.populateFilterValues(products)});
 	}
 		  
 	ngOnDestroy() {
@@ -90,6 +86,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 	onButtonClick(): void {
 		this.pageTitle = "Click here!";
+	}
+
+	onRowClicked(row: any) {
+		console.log('Row clicked: ', row);
 	}
 	
 	openSnackBar(message: string, action: string) {
@@ -109,7 +109,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 
     // Custom filter method fot Angular Material Datatable
-    createFilter() {
+ /*   createFilter() {
         let filterFunction = function (data: any, filter: string): boolean {
             let searchTerms = JSON.parse(filter);
             let isFilterSet = false;
@@ -147,7 +147,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
         }
       return filterFunction
     }
-
+*/
 
     // Reset table filters
     resetFilters() {
@@ -156,7 +156,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.filterSelectObj.forEach((value: any) => {
           value.modelValue = undefined;
         })
-        this.dataSource.filter = "";  
+    //    this.dataSource.filter = "";  
     }
 
 
@@ -173,48 +173,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
 
-    //fetching firs data/filtered data into the table
-    getRemoteData() {
-
-		let productsArray: any;
-		this.sub = this.productService.getProducts().subscribe({
-		  next: (products) => {
-			  productsArray = products;
-			  this.filteredProducts = this.products;
-			  this.dataSource.data = productsArray;
-  
-			  this.filterSelectObj.filter((o: any) => {
-				o.options = this.getFilterObject(productsArray, o.columnProp);
-			  });
-		  },
-		  error: (err) => (this.errorMessage = err)
-		});
+    populateFilterValues(products: IProduct[]) {
+		//console.log(this.products)
+		this.filterSelectObj.filter((o: any) => {
+			o.options = this.getFilterObject(products, o.columnProp);
+		   });
 	  
 	}
   
+	
 }
 
-
-//search bar
-/*	private _listFilter = "";
-	get listFilter(): string {
-		return this._listFilter;
-	}
-
-	set listFilter(value: string) {
-		this._listFilter = value;
-		console.log("in setter ", value);
-		this.filteredProducts = this.performFilter(value);
-	}
-
-	performFilter(filterBy: string): IProduct[] {
-		filterBy = filterBy.toLocaleLowerCase();
-		return this.products.filter((product: IProduct) =>
-			product.productName.toLocaleLowerCase().includes(filterBy)
-		);
-	}
-//show/hide image button
-	toggleImage(): void {
-		this.showImage = !this.showImage;
-	}*/
 
