@@ -9,9 +9,6 @@ import { Subscription } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProductsDataSource } from "../products-dataSource";
 
-
-
-
 @Component({
 	templateUrl: "./product-list.component.html",
 	styleUrls: ["./product-list.component.css"]
@@ -29,7 +26,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	
 	sub!: Subscription;
 
-	dataSource: any=  ProductsDataSource;
+	dataSource: any = ProductsDataSource;
 	filterValues: any = {};
     displayedColumns: string[] = [ 'imageUrl','productName', 'productCode', 'releaseDate', 'price', 'starRating'];
 
@@ -70,15 +67,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	
 
 	ngOnInit(): void {
-
-	 
-	 //  this.dataSource.filterPredicate = this.createFilter();
-	
-			this.dataSource = new ProductsDataSource(this.productService);
-			this.products = this.dataSource.loadProducts();
-
-				this.populateFilterValues();
-		
+	 // this.dataSource.filterPredicate = this.createFilter();
+		this.dataSource = new ProductsDataSource(this.productService);
+		this.products = this.dataSource.loadProducts({},(products: IProduct[]) => {this.populateFilterValues(products)});
 	}
 		  
 	ngOnDestroy() {
@@ -182,17 +173,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
 
-    populateFilterValues() {
-		console.log(this.products)
-		this.sub = this.productService.findProducts().subscribe({
-		  next: (products) => {
-		
-			    this.filterSelectObj.filter((o: any) => {
-				 o.options = this.getFilterObject(products, o.columnProp);
-			    });
-		    },
-		  error: (err) => (this.errorMessage = err)
-		});
+    populateFilterValues(products: IProduct[]) {
+		//console.log(this.products)
+		this.filterSelectObj.filter((o: any) => {
+			o.options = this.getFilterObject(products, o.columnProp);
+		   });
 	  
 	}
   

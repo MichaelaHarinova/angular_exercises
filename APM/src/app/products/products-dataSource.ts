@@ -14,8 +14,6 @@ export class ProductsDataSource implements DataSource<IProduct> {
 
     constructor(private productService: ProductService) {}
 
-  
-
     connect(collectionViewer: CollectionViewer): Observable<IProduct[]> {
         console.log("Connecting data source");
         return this.productsSubject.asObservable();
@@ -26,8 +24,7 @@ export class ProductsDataSource implements DataSource<IProduct> {
         this.loadingSubject.complete();
     }
   
-    loadProducts(filter: {[index: string]: any} = {}) {
-
+    loadProducts(filter: {[index: string]: any} = {}, func:(products: IProduct[])=>void = (products)=>{}): void {
         this.loadingSubject.next(true);
        
         this.productService.findProducts(filter).pipe(
@@ -36,9 +33,7 @@ export class ProductsDataSource implements DataSource<IProduct> {
         )
         .subscribe(products => {
             this.productsSubject.next(products);
-            console.log(this.productsSubject)
-            return products
-        } )
-       
+            func(products);
+        })
     } 
 }

@@ -6,14 +6,12 @@ import { catchError, tap, map } from "rxjs/operators";
 import { productImpl } from "./productImpl";
 import * as _ from 'lodash';
 
-
 @Injectable({
 	providedIn: "root"
 })
 export class ProductService {
 	private productUrl = 'http://localhost:9001/products';
   	private productUrlEdit = 'http://localhost:9001/editProduct';
-	  
 
 	constructor(private http: HttpClient) {}
 
@@ -29,7 +27,7 @@ export class ProductService {
             .pipe(
 				tap((data) => console.log((data))),
 			catchError(this.handleError)
-		    );    
+		    );   
         }
 
 	submitProduct(product: IProduct, editProduct: productImpl): Observable<any> {
@@ -43,7 +41,7 @@ export class ProductService {
 	}  */
 
 	findProducts(filter: {[index: string]: any} = {}):  Observable<IProduct[]> {
-		console.log("searching products data")
+		console.log("productService.findProducts()")
 		let httpParams = new HttpParams();
 		Object.keys(filter).forEach(key =>{
 			httpParams.set(key,filter[key])
@@ -51,8 +49,6 @@ export class ProductService {
 
         return this.http.get<IProduct[]>(this.productUrl, {
             params: httpParams
-			
-            
         }).pipe(
             map(res =>  res)
         );
