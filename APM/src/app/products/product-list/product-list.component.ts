@@ -30,11 +30,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 	dataSource: any = ProductsDataSource;
 	filterValues: any = {};
-    displayedColumns: string[] = [ 'imageUrl','productName', 'productCode', 'releaseDate', 'price', 'starRating'];
+    displayedColumns: string[] = [
+		'imageUrl',
+		'productName',
+		'productCode',
+		'releaseDate',
+		'price',
+		'starRating'
+	];
 
 	products: IProduct[] = [];
 	filteredProducts: IProduct[] = [];
 	filterSelectObj: any = [];
+
 
 	constructor(
 		private productService: ProductService,
@@ -82,6 +90,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 			let decodedParams: {[index: string]: any} = {};
 			Object.keys(params).forEach((key: string) => {
 				decodedParams[key] = decodeURI(params[key]);
+
 			});
 			this.dataSource.loadProducts(decodedParams,(products: IProduct[]) => {this.populateFilterValues(products)});
 		});
@@ -117,18 +126,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
     // Called on Filter change
     filterChange(filter: any, event: any) {
 	//	console.log('productListComponent.filterChange()');
+	if(filter.modelValue === "" && this.filterValues[filter.columnProp]){
+		console.log('empty');
+		delete this.filterValues[filter.columnProp];
+	} else {
+		this.filterValues[filter.columnProp] = event.target.value;
 
-	this.filterValues[filter.columnProp] = event.target.value;
-
-		this.router.navigate(['/products'], {
-			queryParams: this.filterValues,
-			relativeTo: this.route
-		 });
-
-		//this.dataSource.loadProducts(this.filterValues,(products: IProduct[]) => {this.populateFilterValues(products)});
-
-		
 	}
+		this.router.navigate(['/products'], {
+			queryParams: this.filterValues
+		});	
+	}	
+		
   
 
     // Reset table filters
