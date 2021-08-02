@@ -35,17 +35,19 @@ export class ProductService {
 		return this.http.post(this.productUrlEdit, editProduct);
 	}
 
-/*	getFilteredProduct(searchTerms: object): Observable<any> {
-		console.log("fetching data")
-		return this.http.post(this.productUrl, searchTerms);
-	}  */
 
 	findProducts(filter: {[index: string]: any} = {}):  Observable<IProduct[]> {
 		console.log("productService.findProducts()")
-		let httpParams = new HttpParams();
+		let httpParams : HttpParams = new HttpParams();
 		Object.keys(filter).forEach(key =>{
-			httpParams.set(key,filter[key])
-		})
+			if(filter[key] === ""){
+				return;
+			}
+			httpParams = httpParams.append(key,filter[key])
+			console.log('Added param')
+		});
+
+		console.log(httpParams)
 
         return this.http.get<IProduct[]>(this.productUrl, {
             params: httpParams
