@@ -8,6 +8,8 @@ import { ProductService } from "../product.service";
 import { Subscription } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProductsDataSource } from "../products-dataSource";
+import { ActivatedRoute, Router } from "@angular/router";
+
 
 @Component({
 	templateUrl: "./product-list.component.html",
@@ -36,31 +38,38 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private productService: ProductService,
-		private _snackBar: MatSnackBar
+		private _snackBar: MatSnackBar,
+		private route: ActivatedRoute,
+		private router: Router
 	) {
 		this.filterSelectObj = [
 			
 			{
 			  name: 'Product Name',
 			  columnProp: 'productName',
-			  options: []
+			  options: [],
+			  noneSelected: true
 			}, {
 			  name: 'Product Code',
 			  columnProp: 'productCode',
-			  options: []
+			  options: [],
+			  noneSelected: true
 			}, {
 			  name: 'Release Date',
 			  columnProp: 'releaseDate',
-			  options: []
+			  options: [],
+			  noneSelected: true
 			}, {
 			  name: 'Price',
 			  columnProp: 'price',
-			  options: []
+			  options: [],
+			  noneSelected: true
 			},
 			{
 			  name: 'Star Rating',
 			  columnProp: 'starRating',
-			  options: []
+			  options: [],
+			  noneSelected: true
 			}
 		]
 	}
@@ -69,7 +78,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 	 // this.dataSource.filterPredicate = this.createFilter();
 		this.dataSource = new ProductsDataSource(this.productService);
-		this.products = this.dataSource.loadProducts({},(products: IProduct[]) => {this.populateFilterValues(products)});
+		this.route.queryParams.subscribe(params => {
+			let decodedParams: {[index: string]: any} = {};
+			Object.keys(params).forEach((key: string) => {
+				decodedParams[key] = decodeURI(params[key]);
+			});
+			this.dataSource.loadProducts(decodedParams,(products: IProduct[]) => {this.populateFilterValues(products)});
+		});
 	}
 		  
 	ngOnDestroy() {
@@ -101,62 +116,27 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     // Called on Filter change
     filterChange(filter: any, event: any) {
+	//	console.log('productListComponent.filterChange()');
 
-		this.filterValues[filter.columnProp] = event.target.value.trim().toLowerCase()
-		this.dataSource.filter = JSON.stringify(this.filterValues)
+	this.filterValues[filter.columnProp] = event.target.value;
+
+		this.router.navigate(['/products'], {
+			queryParams: this.filterValues,
+			relativeTo: this.route
+		 });
+
+		//this.dataSource.loadProducts(this.filterValues,(products: IProduct[]) => {this.populateFilterValues(products)});
+
+		
 	}
   
-
-
-    // Custom filter method fot Angular Material Datatable
- /*   createFilter() {
-        let filterFunction = function (data: any, filter: string): boolean {
-            let searchTerms = JSON.parse(filter);
-            let isFilterSet = false;
-	  
-            for (const col in searchTerms) {
-               if (searchTerms[col].toString() !== '') {
-                isFilterSet = true;
-               } else {
-                delete searchTerms[col];
-               }
-            }
-
-            let nameSearch = () => {
-	    	    let matches: boolean []= [];
-                if (isFilterSet) {
-                    for (const col in searchTerms) {
-			            matches.push(false);
-                        searchTerms[col].trim().toLowerCase().split(' ').forEach((word: any, index: number) => {
-                            if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) { 
-                             matches[matches.length -1] = true
-                            }
-                        });
-                    }
-		            let numberOfNoMatches = matches.filter(e => e === false);
-		        	if(numberOfNoMatches.length > 0){
-			         return false
-		            } else {
-			         return true
-		            }
-                } else {
-                 return true;
-                }
-            } 
-          return nameSearch()
-        }
-      return filterFunction
-    }
-*/
 
     // Reset table filters
     resetFilters() {
 
-        this.filterValues = {}
-        this.filterSelectObj.forEach((value: any) => {
-          value.modelValue = undefined;
-        })
-    //    this.dataSource.filter = "";  
+		this.dataSource.loadProducts({},(products: IProduct[]) => {
+			this.populateFilterValues(products);
+		});
     }
 
 
