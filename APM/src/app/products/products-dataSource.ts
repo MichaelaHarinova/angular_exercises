@@ -14,7 +14,6 @@ export class ProductsDataSource implements DataSource<IProduct> {
     constructor(private productService: ProductService) {}
 
     connect(collectionViewer: CollectionViewer): Observable<IProduct[]> {
-        console.log("Connecting data source");
         return this.productsSubject.asObservable();
     }
 
