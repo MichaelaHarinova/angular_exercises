@@ -11,7 +11,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import { MatSortModule } from "@angular/material/sort";
 
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListComponent } from "../products/product-list/product-list.component";
@@ -41,7 +40,6 @@ import { TooltipComponent } from "../shared/components";
 		MatTableModule,
 		MatSelectModule,
 		MatPaginatorModule,
-        MatSortModule,
         MatProgressSpinnerModule,
 		
 		FormsModule,
