@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { WelcomeComponent } from "./home/welcome.component";
-import { ProductModule } from "./products/product.module";
+import { ProductModule } from "./products/product-modules/product.module";
 
 @NgModule({
 	declarations: [AppComponent, WelcomeComponent],

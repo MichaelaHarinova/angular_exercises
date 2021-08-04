@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Component, OnInit } from "@angular/core";
 import { IProduct } from "../product";
-import { ProductService } from "../product.service";
+import { ProductService } from "../product-services/product.service";
 import { Subscription } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ProductsDataSource } from "../products-dataSource";
+import { ProductsDataSource } from "../product-services/products-dataSource";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -69,7 +71,6 @@ export class ProductListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// this.dataSource.filterPredicate = this.createFilter();
 		this.dataSource = new ProductsDataSource(this.productService);
 		this.route.queryParams.subscribe((params) => {
 			this.dataSource.loadProducts(params, (products: IProduct[]) => {
