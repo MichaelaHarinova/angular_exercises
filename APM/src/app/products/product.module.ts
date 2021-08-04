@@ -21,6 +21,7 @@ import { TooltipComponent } from "../shared/components";
 
 
 
+
 @NgModule({
 	declarations: [
 		ProductListComponent,

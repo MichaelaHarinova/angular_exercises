@@ -12,7 +12,7 @@ import {
 	styleUrls: ["./star.component.css"]
 })
 export class StarComponent implements OnChanges {
-	 		 cropWidth = 75;
+	cropWidth = 75;
 	@Input() maxDivWidth = 75;
 	@Input() starSize = 16;
 	@Input() rating = 0;
