@@ -47,8 +47,18 @@ export class BarChartComponent implements OnInit {
 			maxBarThickness: 80,
 			label: "Product price",
 			data: [],
-			hoverBackgroundColor: "rgb(48, 152, 128)",
-			hoverBorderColor: "black",
+			hoverBackgroundColor: [
+				"rgb(144, 255, 144)",
+				"rgb(32, 123, 235)",
+				"rgb(90, 202, 172)",
+				"rgb(71, 165, 74)",
+				"rgb(54, 162, 235)",
+				"rgb(98, 188, 233)",
+				"rgb(75, 192, 192)",
+				"rgb(98, 152, 233)",
+				"rgb(16, 207, 245)"
+			],
+			hoverBorderColor: "none",
 			backgroundColor: [
 				"rgba(144, 255, 144, 0.2)",
 				"rgba(32, 123, 235, 0.2)",
