@@ -1,4 +1,4 @@
-import { IProduct } from "./product";
+import { IProduct } from "../product";
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { ProductService } from "./product.service";

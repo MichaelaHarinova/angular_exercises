@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ProductDetailComponent } from "./product-detail/product-detail.component";
-import { ProductDetailGuard } from "./product-detail/product-detail.guard";
-import { ProductListComponent } from "./product-list/product-list.component";
-import { ProductEditComponent } from "./product-edit/product-edit.component";
+import { ProductDetailComponent } from "../product-detail/product-detail.component";
+import { ProductDetailGuard } from "../product-detail/product-detail.guard";
+import { ProductListComponent } from "../product-list/product-list.component";
+import { ProductEditComponent } from "../product-edit/product-edit.component";
 
 const routes: Routes = [
 	{
@@ -12,7 +12,7 @@ const routes: Routes = [
 		component: ProductDetailComponent
 	},
 	{ path: "products", component: ProductListComponent },
-	{ path: "editProduct/:id", component: ProductEditComponent}
+	{ path: "editProduct/:id", component: ProductEditComponent }
 ];
 
 @NgModule({

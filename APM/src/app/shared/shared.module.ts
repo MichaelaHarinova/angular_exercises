@@ -7,7 +7,8 @@ import { ChartsModule } from "ng2-charts";
 import { BicolorButtonComponent } from "./components/bicolor-button/bicolor-button.component";
 import { ConvertToSpacesPipe } from "./pipes/convert-to-spaces.pipe";
 import { StarComponent } from "./components/star/star.component";
-import { BubbleChartComponent } from "./components/bubble-chart/bubble-chart.component";
+import { BubbleChartComponent } from "./components/charts/bubble-chart/bubble-chart.component";
+import { BarChartComponent } from "./components/charts/bar-chart/bar-chart.component";
 
 @NgModule({
 	declarations: [
@@ -15,6 +16,7 @@ import { BubbleChartComponent } from "./components/bubble-chart/bubble-chart.com
 		StarComponent,
 		BicolorButtonComponent,
 		BubbleChartComponent,
+		BarChartComponent,
 
 		// Pipes
 		ConvertToSpacesPipe
@@ -25,6 +27,7 @@ import { BubbleChartComponent } from "./components/bubble-chart/bubble-chart.com
 		StarComponent,
 		BicolorButtonComponent,
 		BubbleChartComponent,
+		BarChartComponent,
 
 		// Pipes
 		ConvertToSpacesPipe

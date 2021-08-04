@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IProduct } from "./product";
+import { IProduct } from "../product";
 import {
 	HttpClient,
 	HttpErrorResponse,
@@ -7,7 +7,7 @@ import {
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap, map } from "rxjs/operators";
-import { productImpl } from "./productImpl";
+import { productImpl } from "../productImpl";
 import * as _ from "lodash";
 
 @Injectable({
@@ -21,6 +21,7 @@ export class ProductService {
 	getProducts(): Observable<IProduct[]> {
 		return this.http.get<IProduct[]>(this.productUrl + "/products").pipe(
 			tap((data) => console.log(data)),
+			// eslint-disable-next-line @typescript-eslint/unbound-method
 			catchError(this.handleError)
 		);
 	}

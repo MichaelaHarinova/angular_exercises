@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartType, Chart } from "chart.js";
 import { Color } from "ng2-charts";
-import { ProductService } from "src/app/products/product.service";
-import { IProduct } from "../../../products/product";
+import { ProductService } from "src/app/products/product-services/product.service";
+import { IProduct } from "../../../../products/product";
 
 @Component({
 	selector: "pm-bubble-chart",
@@ -12,7 +12,6 @@ import { IProduct } from "../../../products/product";
 export class BubbleChartComponent implements OnInit {
 	constructor(private productService: ProductService) {}
 
-	chart = [];
 	product_names: string[] = [];
 	product_prices: { x: number; y: number; r: number }[] = [];
 
